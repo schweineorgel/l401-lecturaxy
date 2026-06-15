@@ -1,10 +1,11 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 import socket
 
 app = Flask(__name__)
 
-HOST = "10.124.178.79"
+HOST = "192.168.1.22"
 PORT = 12345
+
 
 def leer_sensor():
     try:
@@ -24,6 +25,11 @@ def leer_sensor():
         print("ERROR:", e)
         return 0, 0
 
+
+def escalar(valor):
+    valor = max(-10, min(10, valor))
+    return min(3, int((valor + 10) / 5))
+    
 @app.route('/')
 def index():
     ejeX, ejeY = leer_sensor()
@@ -33,13 +39,21 @@ def index():
         ejeY=ejeY
     )
 
-@app.route('/datos')
-def datos():
-    ejeX, ejeY = leer_sensor()
-    return jsonify({
-        'ejeX': ejeX,
-        'ejeY': ejeY
-    })
 
+@app.route('/matrix')
+def matrix():
+    ejeX, ejeY = leer_sensor()
+
+    x = escalar(ejeX)
+    y = escalar(ejeY)
+
+    return render_template(
+        'matrix.html',
+        ejeX=ejeX,
+        ejeY=ejeY,
+        x=x,
+        y=y
+    )
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

@@ -1,107 +1,119 @@
-# Actividad Base: Flask + DataXY
+# Visualización de Datos X-Y con Flask
 
-Este repositorio es un ejemplo inicial para practicar con **Flask** y **GitHub**.
-La intensión es que los estudiantes lo usen como punto de partida, lo modifiquen y luego lo suban a su propio repositorio.
+Proyecto desarrollado para la asignatura **Desarrollo de Software para Hardware (DCSH01)**.
+
+La aplicación recibe datos **X** e **Y** desde una aplicación móvil mediante una conexión TCP, utilizando **Flask** como servidor web y una interfaz desarrollada únicamente con **HTML, CSS y Jinja**, sin utilizar JavaScript.
 
 ---
 
 ## Objetivo
 
-* Clonar el repositorio y trabajar en una copia personal
-* Ejecutar Flask y recibir datos **x, y** desde una aplicación móvil
-* Visualizar datos en una página HTML sencilla
-* Subir cambios a GitHub
+Desarrollar una aplicación web capaz de:
+
+* Recibir datos **X** e **Y** desde una aplicación móvil.
+* Mostrar los valores numéricos de ambos ejes en tiempo real.
+* Representar gráficamente la posición recibida mediante una matriz de **4×4**.
+* Permitir la navegación entre distintas vistas utilizando múltiples páginas HTML.
 
 ---
 
-## Requisitos
+## Funcionamiento
 
-* Entorno para Python y Flask instalados
-* Cuenta en GitHub
-* Aplicación móvil (APK) para enviar datos
+La aplicación se compone de dos vistas principales:
 
----
+### Página principal
 
-## Descarga de Aplicación APK
+La página principal muestra los valores actuales de los sensores:
 
-Se puede descargar la aplicación móvil desde aquí:
+* Sensor X
+* Sensor Y
 
-[Descargar XYaTCPfull.apk](./XYaTCPfull.apk)
-
----
-
-## Pasos básicos
-
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/jotaefepece/Actividad-dataXY-base
-cd Actividad-dataXY-base
-```
-
-### 2. Instalar y ejecutar la aplicación apk
-
-```bash
-### La red del celular tiene que estar en la misma red local ###
-```
-
-### 3. Ejecutar Flask
-
-```bash
-python3 app.py
-```
-
-### 4. Probar en el navegador
-
-```
-http://127.0.0.1:5000
-```
+La información se actualiza automáticamente mediante la recarga periódica de la página.
 
 ---
 
-## Estructura del ejercicio
+### Vista de Matriz 4×4
 
-```bash
+La segunda vista representa los datos X e Y en una matriz de **4×4 celdas**.
+
+Los valores recibidos desde la aplicación móvil tienen un rango aproximado de:
+
+```text
+X, Y ∈ [-10, +10]
+```
+
+Estos valores son escalados a coordenadas discretas entre **0 y 3**, permitiendo representar la posición dentro de la matriz.
+
+La celda correspondiente a la posición calculada se ilumina en color verde, entregando una representación visual del movimiento o inclinación detectada.
+
+---
+
+## Tecnologías utilizadas
+
+* Python 3
+* Flask
+* HTML5
+* CSS3
+* Jinja2
+* Sockets TCP
+
+---
+
+## Estructura del proyecto
+
+```text
 .
 ├── app.py
-├── capturas
-│   ├── archivos-base.png
-│   └── vista-base.png
 ├── README.md
 ├── templates
-│   └── index.html
-└── XYaTCPfull.apk
+│   ├── index.html
+│   └── matrix.html
+└── capturas
+    ├── vista-principal.png
+    └── vista-matriz.png
 ```
 
 ---
 
 ## Capturas
 
-### Estructura de archivos
+### Vista principal
 
-![Estructura de los archivos](capturas/archivos-base.png)
-
----
-
-### Vista en el navegador
-
-![Vista HTML](capturas/vista-base.png)
+![Vista principal](capturas/vista-principal.png)
 
 ---
 
-## Inicio del ejercicio
+### Vista de la matriz 4×4
 
-Cada estudiante debe:
-
-* Crear una pestaña en Flask que muestre un dato recibido
-* Modificar el HTML para encender una celda en un rectángulo **2x2** según los valores **x, y**
-* Subir su versión modificada a su propio repositorio
+![Vista matriz](capturas/vista-matriz.png)
 
 ---
 
-## Notas
+## Ejecución
 
-* Este README es solo una guía básica.
-* El trabajo final depende de cada estudiante y de cómo adapte el ejercicio.
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/schweineorgel/l401-lecturaxy
+cd l401-lecturaxy
+```
+
+Ejecutar la aplicación:
+
+```bash
+python3 app.py
+```
+
+Abrir el navegador:
+
+```text
+http://127.0.0.1:5000
+```
 
 ---
+
+## Autor
+
+**Javier Salas**
+
+Desarrollo de Software para Hardware (DCSH01)

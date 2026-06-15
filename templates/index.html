@@ -1,77 +1,85 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dashboard Simulator</title>
+    <title>Lecturas X-Y (Javier Salas)</title>
+    <meta http-equiv="refresh" content="1">
+
 <style>
-	body{
-		background-color: black
+    body {
+        background-color: black;
+        color: white;
+        text-align: center;
+        font-family: Arial, sans-serif;
     }
-	
-	.contenedor {
-		display: flex;
-		justify-content: center;
-		gap: 20px;
+
+    #contenedor,
+    #contenedorBoton {
+        display: flex;
+        justify-content: center;
     }
-    
-    .boton-contenedor {
-		display: flex;
-		justify-content: center;
-		gap: 20px;
-		margin-top: 20px;
-	}
-    
-    .tarjeta{
-		width:250px;
-		background-color:#eeeeee;
-		border-radius:10px;
-		padding:15px;
-		text-align:center;
-	}
 
-	.valor{
-		font-size:30px;
-	}
-	
-	.boton{
-		background-color:green;
-		color:white;
-		padding:20px;
-		border:none;
-		border-radius:5px;
-		cursor: pointer;
-	}
+    #contenedor {
+        gap: 20px;
+    }
 
+    #contenedorBoton {
+        margin-top: 20px;
+    }
+
+    #tarjetaX,
+    #tarjetaY {
+        width: 250px;
+        background-color: #eeeeee;
+        border-radius: 10px;
+        padding: 15px;
+        text-align: center;
+        color: black;
+    }
+
+    #tarjetaMatrix {
+        width: 120px;
+        background-color: #eeeeee;
+        border-radius: 10px;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        color: black;
+        font-size: 20px;
+    }
+
+    #tarjetaMatrix:hover {
+        background-color: #dddddd;
+        cursor: pointer;
+    }
+
+    #valorX,
+    #valorY {
+        font-size: 30px;
+    }
 </style>
 </head>
-<script>
-async function actualizarDatos() {
-    try {
-        const response = await fetch('/datos');
-        const data = await response.json();
 
-        document.getElementById('sensorX').textContent = data.ejeX;
-        document.getElementById('sensorY').textContent = data.ejeY;
-    } catch (error) {
-        console.error('Error actualizando datos:', error);
-    }
-}
-
-setInterval(actualizarDatos, 20);
-</script>
 <body>
-<div class="contenedor">
-	<div class="tarjeta">
-		<h2>Sensor X</h2>
-		<p class="valor" id="sensorX">
-			{{ ejeX }}
-		</p>
-	</div>
-	<div class="tarjeta">
-		<h2>Sensor Y</h2>
-		<p class="valor" id="sensorY">
-			{{ ejeY }}
-		</p>
-	</div>
-</div>
+
+    <h1>Valores X e Y</h1>
+
+    <div id="contenedor">
+        <div id="tarjetaX">
+            <h2>Sensor X</h2>
+            <p id="valorX">{{ ejeX }}</p>
+        </div>
+
+        <div id="tarjetaY">
+            <h2>Sensor Y</h2>
+            <p id="valorY">{{ ejeY }}</p>
+        </div>
+    </div>
+
+    <div id="contenedorBoton">
+        <a id="tarjetaMatrix" href="{{ url_for('matrix') }}">
+            Matriz →
+        </a>
+    </div>
+
 </body>
 </html>

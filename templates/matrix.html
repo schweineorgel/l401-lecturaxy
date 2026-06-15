@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Matriz 4x4 (Javier Salas)</title>
+    <meta http-equiv="refresh" content="1">
+
+<style>
+    body {
+        background-color: black;
+        color: white;
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+
+    #matriz {
+        display: grid;
+        grid-template-columns: repeat(4, 80px);
+        grid-template-rows: repeat(4, 80px);
+        gap: 10px;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    #matriz div {
+        width: 80px;
+        height: 80px;
+        background-color: #eeeeee;
+        border-radius: 10px;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-sizing: border-box;
+    }
+    
+    #tarjetaXY {
+		width: 120px;
+		background-color: #eeeeee;
+		border-radius: 10px;
+		padding: 10px 15px;
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		display: block;
+		font-size: 20px;
+	}
+
+	#tarjetaXY:hover {
+		background-color: #dddddd;
+		cursor: pointer;
+	}
+	
+	#contenedorBoton {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+	}	
+</style>
+</head>
+
+<body>
+
+	<h1>Matriz 4×4</h1>
+
+	<div id="matriz">
+		{% for fila in range(3, -1, -1) %}
+			{% for columna in range(4) %}
+				<div
+					id="celda{{ fila }}{{ columna }}"
+					{% if columna == x and fila == y %}
+					style="background-color: limegreen;"
+					{% endif %}
+				>
+					{{ columna }},{{ fila }}
+				</div>
+			{% endfor %}
+		{% endfor %}
+	</div>
+	<div id="contenedorBoton">
+        <a id="tarjetaXY" href="{{ url_for('index') }}">
+            Valores X/Y →
+        </a>
+    </div>
+
+</body>
+</html>

@@ -112,6 +112,13 @@ http://127.0.0.1:5000
 
 ---
 
+## Referencias
+
+Este proyecto fue desarrollado a partir del repositorio base proporcionado por el docente.
+No se utilizaron repositorios adicionales de otros estudiantes.
+
+---
+
 ## Autor
 
 **Javier Salas**
